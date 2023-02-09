@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="iTunesSearch" customModuleProvider="target">
+            <connections>
+                <outlet property="mainCollectionView" destination="mdD-gF-Lbb" id="VvI-8Y-l96"/>
+                <outlet property="searchBar" destination="ldf-9D-rnw" id="mfJ-XM-s8W"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="ldf-9D-rnw">
+                    <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="WyL-Zi-01H"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="jx2-yZ-7Me"/>
+                    </connections>
+                </searchBar>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Knn-Kk-qXh">
+                    <rect key="frame" x="16" y="107" width="361" height="32"/>
+                    <segments>
+                        <segment title="Movies"/>
+                        <segment title="Music"/>
+                        <segment title="Apps"/>
+                        <segment title="Books"/>
+                    </segments>
+                    <connections>
+                        <action selector="segmentDidChanged:" destination="-1" eventType="valueChanged" id="TFC-3f-6Xz"/>
+                    </connections>
+                </segmentedControl>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mdD-gF-Lbb">
+                    <rect key="frame" x="10" y="146" width="373" height="706"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rmi-wr-2Dy">
+                        <size key="itemSize" width="180" height="180"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mdD-gF-Lbb" secondAttribute="trailing" constant="10" id="3E2-gx-X0X"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Knn-Kk-qXh" secondAttribute="trailing" constant="16" id="4XN-59-jXl"/>
+                <constraint firstAttribute="bottom" secondItem="mdD-gF-Lbb" secondAttribute="bottom" id="BMb-iW-e8b"/>
+                <constraint firstItem="ldf-9D-rnw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="EmE-Qh-xTe"/>
+                <constraint firstItem="ldf-9D-rnw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lkk-90-0vb"/>
+                <constraint firstItem="Knn-Kk-qXh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ZFQ-mk-E0w"/>
+                <constraint firstItem="Knn-Kk-qXh" firstAttribute="top" secondItem="ldf-9D-rnw" secondAttribute="bottom" constant="4" id="c2d-TF-zk7"/>
+                <constraint firstItem="ldf-9D-rnw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jjr-CV-Ier"/>
+                <constraint firstItem="mdD-gF-Lbb" firstAttribute="top" secondItem="Knn-Kk-qXh" secondAttribute="bottom" constant="8" symbolic="YES" id="kNH-Bl-zko"/>
+                <constraint firstItem="mdD-gF-Lbb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="lFx-o4-lL4"/>
+            </constraints>
+            <point key="canvasLocation" x="84.732824427480907" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

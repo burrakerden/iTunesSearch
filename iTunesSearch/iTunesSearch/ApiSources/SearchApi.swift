@@ -17,5 +17,8 @@ struct Result: Codable {
     let artworkUrl100: String?
     let collectionPrice: Double?
     let releaseDate: String?
+    let description: String?
+    let longDescription: String?
+    let artistName: String?
     
 }

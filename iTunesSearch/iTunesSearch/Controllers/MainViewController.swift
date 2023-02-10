@@ -21,9 +21,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
-        self.setupUI()
+        setupUI()
     }
 
+    
     @IBAction func segmentDidChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -81,16 +82,29 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let url = data.artworkUrl100 {
             cell.cellImage.sd_setImage(with: URL(string: url))
         }
-        cell.releaseDate.text = data.releaseDate
-        if let price = data.collectionPrice {
-            cell.collectionPrice.text = String(price)
-        }
+        
+        let string = String(data.releaseDate!)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: string)!
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let dateString = dateFormatter.string(from: date)
+        cell.releaseDate.text = "\(dateString)"
+        
+        
+            if let price = data.collectionPrice {
+                cell.collectionPrice.text = "$ \(price)"
+            } else {
+                cell.collectionPrice.text = "free"
+            }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DetailViewController()
-        vc.labelText = "cellText"
+        vc.data = data[indexPath.row]
+
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }

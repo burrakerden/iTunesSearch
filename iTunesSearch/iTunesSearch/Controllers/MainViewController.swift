@@ -23,9 +23,9 @@ class MainViewController: UIViewController {
         getData()
         setupUI()
     }
-
     
     @IBAction func segmentDidChanged(_ sender: UISegmentedControl) {
+        service.limit = 25
         switch sender.selectedSegmentIndex {
         case 0:
             print("Movies selected")
@@ -52,7 +52,6 @@ class MainViewController: UIViewController {
         service.getData() { result in
             guard let result = result?.results else {return}
             self.data = result
-            
             self.mainCollectionView.reloadData()
         } onError: { error in
             print(error)
@@ -77,6 +76,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: MainCollectionViewCell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else {return UICollectionViewCell()}
         let data = data[indexPath.row]
+        
+        if indexPath.row == service.limit - 1 {
+            service.limit += 24
+            getData()
+        }
+        
         cell.collectionName.text = data.trackName
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
         if let url = data.artworkUrl100 {
@@ -92,19 +97,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.releaseDate.text = "\(dateString)"
         
         
-            if let price = data.collectionPrice {
-                cell.collectionPrice.text = "$ \(price)"
-            } else {
-                cell.collectionPrice.text = "free"
-            }
+        if let price = data.collectionPrice {
+            cell.collectionPrice.text = "$ \(price)"
+        } else {
+            cell.collectionPrice.text = "free"
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DetailViewController()
         vc.data = data[indexPath.row]
-
-        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -122,6 +125,9 @@ extension MainViewController: UISearchBarDelegate {
             service.searchText = replaced
             getData()
             print(replaced)
+        } else {
+            service.limit = 25
+            mainCollectionView.reloadData()
         }
     }
 }

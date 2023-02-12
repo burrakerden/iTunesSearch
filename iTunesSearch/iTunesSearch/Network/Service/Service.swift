@@ -14,9 +14,10 @@ protocol ServiceProtocol {
 final class Service: ServiceProtocol {
     var entity = "movie"
     var searchText = ""
+    var limit = 25
     
     func getData(onSuccess: @escaping (SearchApi?) -> Void, onError: @escaping (Alamofire.AFError) -> Void) {
-        ServiceManager.shared.fetch(path: "https://itunes.apple.com/search?term=\(searchText)&media=\(entity)") { (response: SearchApi) in
+        ServiceManager.shared.fetch(path: "https://itunes.apple.com/search?term=\(searchText)&media=\(entity)&limit=\(limit)") { (response: SearchApi) in
             onSuccess(response)
         } onError: { (error) in
             onError(error)

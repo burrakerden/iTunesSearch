@@ -15,6 +15,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
+    var model = Model()
     var service = Service()
     var data = [Result]()
     
@@ -25,22 +26,18 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func segmentDidChanged(_ sender: UISegmentedControl) {
-        service.limit = 25
+        service.limit = 19
         switch sender.selectedSegmentIndex {
         case 0:
-            print("Movies selected")
             service.entity = "movie"
             getData()
         case 1:
-            print("Music selected")
             service.entity = "music"
             getData()
         case 2:
-            print("Apps selected")
             service.entity = "software"
             getData()
         case 3:
-            print("Books selected")
             service.entity = "ebook"
             getData()
         default:
@@ -61,8 +58,7 @@ class MainViewController: UIViewController {
     func setupUI() {
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
-        mainCollectionView.register(UINib(nibName: "MainCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MainCollectionViewCell")
-        title = "Search"
+        model.setupUI(mainCollectionView: mainCollectionView, navigationItem: navigationItem, navigationController: navigationController!)
     }
 }
 
@@ -76,32 +72,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: MainCollectionViewCell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: "MainCollectionViewCell", for: indexPath) as? MainCollectionViewCell else {return UICollectionViewCell()}
         let data = data[indexPath.row]
-        
         if indexPath.row == service.limit - 1 {
-            service.limit += 24
+            service.limit += 20
             getData()
         }
-        
-        cell.collectionName.text = data.trackName
-        SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
-        if let url = data.artworkUrl100 {
-            cell.cellImage.sd_setImage(with: URL(string: url))
-        }
-        
-        let string = String(data.releaseDate!)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let date = dateFormatter.date(from: string)!
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        let dateString = dateFormatter.string(from: date)
-        cell.releaseDate.text = "\(dateString)"
-        
-        
-        if let price = data.collectionPrice {
-            cell.collectionPrice.text = "$ \(price)"
-        } else {
-            cell.collectionPrice.text = "free"
-        }
+        cell.prepareCell(data: data)
         return cell
     }
     
@@ -117,16 +92,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         if searchText.count >= 3 {
-            
-            let str = searchText
-            let replaced = str.replacingOccurrences(of: " ", with: "+")
-            service.searchText = replaced
+            service.searchText = searchText.replacingOccurrences(of: " ", with: "+")
             getData()
-            print(replaced)
         } else {
-            service.limit = 25
+            service.limit = 19
+            data.removeAll()
             mainCollectionView.reloadData()
         }
     }

@@ -20,5 +20,4 @@ struct Result: Codable {
     let description: String?
     let longDescription: String?
     let artistName: String?
-    
 }

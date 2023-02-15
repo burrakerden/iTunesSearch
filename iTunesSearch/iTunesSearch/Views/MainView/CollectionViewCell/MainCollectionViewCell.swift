@@ -16,7 +16,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionName: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
     
-    var model = Model()
+    var model = ViewModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,18 +26,17 @@ class MainCollectionViewCell: UICollectionViewCell {
     func prepareCell(data: Result) {
         
         collectionName.text = data.trackName
-        releaseDate.text = model.dateFormaater(dateToChange: data.releaseDate ?? "")
+        releaseDate.text = String().dateFormaater(dateToChange: data.releaseDate ?? "")
         
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
-        if let url = data.artworkUrl100 {                   //modele nasıl geçebilir ?
+        if let url = data.artworkUrl100 {
             cellImage.sd_setImage(with: URL(string: url))
         }
         
         if let price = data.collectionPrice {
-            collectionPrice.text = "$ \(price)"         //nasıl kısaltılabilir ?
+            collectionPrice.text = "$ \(price)"
         } else {
             collectionPrice.text = "free"
         }
     }
 }
-

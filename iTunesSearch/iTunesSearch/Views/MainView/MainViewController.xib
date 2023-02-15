@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="iTunesSearch" customModuleProvider="target">
             <connections>
+                <outlet property="centerIndicator" destination="953-Mv-LSR" id="H0U-By-ilb"/>
+                <outlet property="indicator" destination="D5l-FT-bY3" id="DzC-Bd-feS"/>
                 <outlet property="mainCollectionView" destination="mdD-gF-Lbb" id="VvI-8Y-l96"/>
                 <outlet property="searchBar" destination="ldf-9D-rnw" id="mfJ-XM-s8W"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -52,6 +54,12 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="D5l-FT-bY3">
+                    <rect key="frame" x="186" y="811" width="20" height="20"/>
+                </activityIndicatorView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="953-Mv-LSR">
+                    <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -60,12 +68,17 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Knn-Kk-qXh" secondAttribute="trailing" constant="16" id="4XN-59-jXl"/>
                 <constraint firstAttribute="bottom" secondItem="mdD-gF-Lbb" secondAttribute="bottom" id="BMb-iW-e8b"/>
                 <constraint firstItem="ldf-9D-rnw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="EmE-Qh-xTe"/>
+                <constraint firstAttribute="bottom" secondItem="D5l-FT-bY3" secondAttribute="bottom" constant="21" id="GNl-Ho-ReB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="D5l-FT-bY3" secondAttribute="trailing" constant="187" id="Ilh-kr-5BR"/>
                 <constraint firstItem="ldf-9D-rnw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lkk-90-0vb"/>
+                <constraint firstItem="953-Mv-LSR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PRV-qz-TgY"/>
                 <constraint firstItem="Knn-Kk-qXh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ZFQ-mk-E0w"/>
+                <constraint firstItem="D5l-FT-bY3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="186" id="bE2-Fh-caF"/>
                 <constraint firstItem="Knn-Kk-qXh" firstAttribute="top" secondItem="ldf-9D-rnw" secondAttribute="bottom" constant="4" id="c2d-TF-zk7"/>
                 <constraint firstItem="ldf-9D-rnw" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jjr-CV-Ier"/>
                 <constraint firstItem="mdD-gF-Lbb" firstAttribute="top" secondItem="Knn-Kk-qXh" secondAttribute="bottom" constant="8" symbolic="YES" id="kNH-Bl-zko"/>
                 <constraint firstItem="mdD-gF-Lbb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="lFx-o4-lL4"/>
+                <constraint firstItem="953-Mv-LSR" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="zK4-de-xqA"/>
             </constraints>
             <point key="canvasLocation" x="84.732824427480907" y="19.718309859154932"/>
         </view>

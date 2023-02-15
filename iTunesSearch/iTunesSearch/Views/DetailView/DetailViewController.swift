@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var detailArtist: UILabel!
     var data: Result?
-    var model = Model()
+    var model = ViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
         detailName.text = data.trackName
         detailDescription.text = data.description?.html2String
         detailMovieDescription.text = data.longDescription
-        detailDate.text = model.dateFormaater(dateToChange: data.releaseDate ?? "")
+        detailDate.text = String().dateFormaater(dateToChange: data.releaseDate ?? "")
         detailArtist.text = data.artistName
         
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)

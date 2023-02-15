@@ -8,6 +8,7 @@ Application contain 2 screen. One of them is search screen and other one is deta
 
 ## Features
 * MVVM Design Pattern
+* XIB
 * UICollectionView
 * UISearchBar
 * UISegmentedControl

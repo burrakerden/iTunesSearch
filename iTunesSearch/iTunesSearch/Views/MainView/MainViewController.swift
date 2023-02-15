@@ -18,11 +18,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var centerIndicator: UIActivityIndicatorView!
     
     var model = ViewModel()
-    var service = Service()
     var data = [Result]()
     
     var searchText = ""
-    var limit = 19
+    var limit = 20
     var entity = "movie"
     
     override func viewDidLoad() {
@@ -31,6 +30,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func segmentDidChanged(_ sender: UISegmentedControl) {
+        limit = 20
         mainCollectionView.setContentOffset(CGPoint.zero, animated: true)
         data.removeAll()
         mainCollectionView.reloadData()
@@ -107,6 +107,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = DetailViewController()
         vc.data = data[indexPath.row]
+        vc.entity = entity
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -120,7 +121,7 @@ extension MainViewController: UISearchBarDelegate {
             self.searchText = searchText.replacingOccurrences(of: " ", with: "+")
             bind(entity: entity, limit: limit, searchText: searchText)
         } else {
-            limit = 19
+            limit = 20
             data.removeAll()
             mainCollectionView.reloadData()
         }

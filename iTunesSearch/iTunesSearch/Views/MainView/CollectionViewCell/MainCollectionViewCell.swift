@@ -15,9 +15,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var collectionPrice: UILabel!
     @IBOutlet weak var collectionName: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
-    
-    var model = ViewModel()
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

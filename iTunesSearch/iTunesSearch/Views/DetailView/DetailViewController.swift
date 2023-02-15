@@ -16,11 +16,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailPrice: UILabel!
     @IBOutlet weak var detailName: UILabel!
     @IBOutlet weak var detailDescription: UILabel!
-    @IBOutlet weak var detailMovieDescription: UILabel!
-    
     @IBOutlet weak var detailArtist: UILabel!
+    
     var data: Result?
-    var model = ViewModel()
+    var entity: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +29,20 @@ class DetailViewController: UIViewController {
     func setupUI() {
         guard let data = data else {return}
         
+        switch entity {
+        case "movie":
+            detailDescription.text = data.longDescription
+        case "music":
+            detailDescription.text = ""
+        case "software":
+            detailDescription.text = data.description
+        case "ebook":
+            detailDescription.text = data.description?.html2String
+        default:
+            print("NOTHING selected")
+        }
+        
         detailName.text = data.trackName
-        detailDescription.text = data.description?.html2String
-        detailMovieDescription.text = data.longDescription
         detailDate.text = String().dateFormaater(dateToChange: data.releaseDate ?? "")
         detailArtist.text = data.artistName
         
